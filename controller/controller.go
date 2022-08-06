@@ -14,3 +14,7 @@ func Pong(ctx *gin.Context) {
 func CreateData(ctx *gin.Context) {
 	service.Create(ctx)
 }
+
+func FindDate(ctx *gin.Context) {
+	service.FindDateByTime(ctx)
+}

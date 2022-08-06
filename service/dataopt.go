@@ -19,11 +19,29 @@ func Create(ctx *gin.Context) {
 		HttpResp.Res(ctx, http.StatusBadGateway, 502, util.TransLate(err), "数据输入不合法")
 		return
 	}
-	data.DataTime = time.Now()
+	date := time.Now().Format("2006-01-02")
+	data.DataTime, _ = time.ParseInLocation("2006-01-02", date, time.Local)
 	err = dao.DB.Create(&data).Error
 	if err != nil {
 		panic(err)
 		return
 	}
 	HttpResp.ResOK(ctx, nil)
+}
+
+// FindDateByTime 根据日期查询
+func FindDateByTime(ctx *gin.Context) {
+
+	var data []models.Todaydate
+	dayStart := ctx.Query("timestart")
+	dayEnd, ok := ctx.GetQuery("timeend")
+	if !ok {
+		dao.DB.Where("datatime = ?", dayStart).Find(&data)
+		HttpResp.ResOK(ctx, data)
+		return
+	} else {
+		dao.DB.Where("datatime BETWEEN ? AND ? ", dayStart, dayEnd).Find(&data)
+		HttpResp.ResOK(ctx, data)
+	}
+
 }

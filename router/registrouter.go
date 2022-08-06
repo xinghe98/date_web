@@ -11,6 +11,7 @@ func RegistRoutes(r *gin.Engine) *gin.Engine {
 	{
 		date.GET("ping", controller.Pong)
 		date.POST("data", controller.CreateData)
+		date.GET("data", controller.FindDate)
 	}
 	return r
 }
