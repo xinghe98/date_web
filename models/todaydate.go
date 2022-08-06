@@ -11,4 +11,6 @@ type Todaydate struct {
 	ScanTimes *int `json:"scantimes" gorm:"column:scantimes" binding:"required,gte=0,lt=200"`
 	// 今日新增客户数
 	NewUsers *int `json:"newUsers" gorm:"column:newUsers" binding:"required,gte=0,lt=200"`
+	// 关联今日成功的用户列表
+	SuccUser []*UsersInfo `json:"succ_user" gorm:"foreignKey:CreatedTime"`
 }
