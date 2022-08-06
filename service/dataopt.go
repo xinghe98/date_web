@@ -6,7 +6,6 @@ import (
 	HttpResp "datevisual/V2/response"
 	"datevisual/V2/util"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 	"net/http"
 	"time"
 )
@@ -16,14 +15,15 @@ func Create(ctx *gin.Context) {
 	var data *models.Todaydate
 	err := ctx.ShouldBindJSON(&data)
 	if err != nil {
-		errs, _ := err.(validator.ValidationErrors)
-		HttpResp.Res(ctx, http.StatusBadGateway, 502, errs.Translate(util.Trans), "请按要求输入失败")
+		//errs, _ := err.(validator.ValidationErrors)
+		HttpResp.Res(ctx, http.StatusBadGateway, 502, util.TransLate(err), "数据输入不合法")
 		return
 	}
 	data.DataTime = time.Now()
 	err = dao.DB.Create(&data).Error
 	if err != nil {
 		panic(err)
+		return
 	}
-	HttpResp.Res(ctx, http.StatusOK, 200, nil, "创建成功")
+	HttpResp.ResOK(ctx, nil)
 }
