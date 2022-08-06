@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// DB 创建一个全局DB对象，后面直接用这个操作数据库
 var DB *gorm.DB
 
 func ConnectMysql() *gorm.DB {

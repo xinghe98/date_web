@@ -3,6 +3,7 @@ package main
 import (
 	"datevisual/V2/dao"
 	"datevisual/V2/router"
+	"datevisual/V2/util"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
@@ -24,6 +25,7 @@ func InitConfig() {
 }
 func main() {
 	InitConfig()
+	util.InitTrans()
 	dao.ConnectMysql()
 	dao.InitModel()
 	r := gin.Default()

@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// RegistRoutes 注册路由
 func RegistRoutes(r *gin.Engine) *gin.Engine {
 	date := r.Group("/api/")
 	{
