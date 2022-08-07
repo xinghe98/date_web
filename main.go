@@ -1,6 +1,7 @@
 package main
 
 import (
+	middleware "datevisual/V2/Middleware"
 	"datevisual/V2/dao"
 	"datevisual/V2/router"
 	"datevisual/V2/util"
@@ -29,6 +30,7 @@ func main() {
 	dao.ConnectMysql()
 	dao.InitModel()
 	r := gin.Default()
+	r.Use(middleware.Cors())
 	r = router.RegistRoutes(r)
 	r.Run(":3000")
 }
