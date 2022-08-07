@@ -13,5 +13,9 @@ func RegistRoutes(r *gin.Engine) *gin.Engine {
 		date.POST("data", controller.CreateData)
 		date.GET("data", controller.FindDate)
 	}
+	newuser := r.Group("/api/")
+	{
+		newuser.POST("newusers", controller.CreateUsers)
+	}
 	return r
 }

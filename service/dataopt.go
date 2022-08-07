@@ -36,7 +36,7 @@ func FindDateByTime(ctx *gin.Context) {
 	dayStart := ctx.Query("timestart")
 	dayEnd, ok := ctx.GetQuery("timeend")
 	if !ok {
-		dao.DB.Where("datatime = ?", dayStart).Find(&data)
+		dao.DB.Where("datatime = ?", dayStart).Preload("SuccUser").Find(&data)
 		HttpResp.ResOK(ctx, data)
 		return
 	} else {
