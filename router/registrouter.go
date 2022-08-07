@@ -16,6 +16,7 @@ func RegistRoutes(r *gin.Engine) *gin.Engine {
 	newuser := r.Group("/api/")
 	{
 		newuser.POST("newusers", controller.CreateUsers)
+		newuser.GET("newusers", controller.FindAllUsers)
 	}
 	return r
 }

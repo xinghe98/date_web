@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// CreateUser 创建今日新增的用户信息
 func CreateUser(ctx *gin.Context) {
 	var userinfos models.UsersInfo
 	err := ctx.ShouldBindJSON(&userinfos)
@@ -26,4 +27,11 @@ func CreateUser(ctx *gin.Context) {
 		return
 	}
 	HttpResp.ResOK(ctx, nil)
+}
+
+// FindAllUser 查询所有的新增用户信息
+func FindAllUser(ctx *gin.Context) {
+	var allusers []models.UsersInfo
+	dao.DB.Find(&allusers)
+	HttpResp.ResOK(ctx, allusers)
 }
